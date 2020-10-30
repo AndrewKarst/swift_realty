@@ -1,0 +1,22 @@
+{% extends "swift_realtys/base.html" %}
+
+{% block header %}
+  <div class='jumbotron'>
+    <h1>Find your dream home!</h1>
+  </div>
+{% endblock header %}
+
+{% block content %}
+  {% if user.is_authenticated %}
+  <h2>
+    <a href="{% url 'swift_realtys:listings' %}">Go to home listings.</a>
+  </h2>
+  {% else %}
+  <h2>
+    <a href="{% url 'users:register' %}">Register an account</a> to search for home listings and connect with realtors.
+  </h2>
+  <h2>
+    When you find a home you like you can save it to your favorites list, then contact the listing's realtor.
+  </h2>
+  {% endif %}
+{% endblock content %}
