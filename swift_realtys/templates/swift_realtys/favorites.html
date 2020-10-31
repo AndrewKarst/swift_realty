@@ -5,25 +5,23 @@
 {% endblock header %}
 
 {% block content %}
-  <ul>
+    <div class="card-deck">
       {% for listing in listings %}
         {% if listing.favorite == True %}
-      <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="?" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">{{ listing.address }}</h5>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item"><p class="card-text">{{ listing.description }}</p></li>
-        </ul>
-        <div class="card-body">
-          <a href="{% url 'swift_realtys:listing' listing.id %}">{{ listing }}</a>
-        </div>
-      </div>
+        <div class="col-sm-4">
+            <div class="card mt-5">
+              <img class="card-img-top" src="..." alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{ listing.address }}</h5>
+                <p class="card-text">{{ listing.description }}</p>
+              </div>
+              <div class="card-footer">
+                <a href="{% url 'swift_realtys:listing' listing.id %}">Details</a>
+              </div>
+            </div>
+            </div>
         {% endif %}
       {% endfor %}
-  </ul>
-
-  <h3><a href="{% url 'swift_realtys:new_listing' %}">Add a new listing</a></h3>
+    </div>
 
   {% endblock content %}

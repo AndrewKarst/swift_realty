@@ -32,4 +32,7 @@ urlpatterns = [
 
     # Show all realtors.
     path('realtors/', views.realtors, name='realtors'),
+
+    # Page for adding a realtor
+    path('new_realtor/', views.new_realtor, name='new_realtor'),
 ]

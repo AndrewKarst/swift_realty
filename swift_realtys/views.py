@@ -3,8 +3,8 @@ from django.http import HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 
-from .models import Listing
-from .forms import ListingForm
+from .models import Listing, Realtor
+from .forms import ListingForm, RealtorForm
 
 # Create your views here.
 
@@ -23,17 +23,13 @@ def resources(request):
 @login_required
 def listings(request):
     """Show all listings"""
-    listings = Listing.objects.filter(owner=request.user).order_by('date_added')
+    listings = Listing.objects.all().order_by('date_added')
     context = {'listings': listings}
     return render(request, 'swift_realtys/listings.html', context)
 
-@login_required
 def listing(request, listing_id):
     """Show a single listing"""
     listing = Listing.objects.get(id=listing_id)
-    # Make sure the topic belongs to the current user.
-    if listing.owner != request.user:
-        raise Http404
 
     context = {'listing': listing}
     return render(request, 'swift_realtys/listing.html', context)
@@ -65,10 +61,10 @@ def edit_listing(request, listing_id):
 
     if request.method != 'POST':
         # Initial request; pre-fill form with the current entry.
-        form = ListingForm(instance=listing_id)
+        form = ListingForm(instance=listing)
     else:
         # POST data submittedl process data.
-        form = ListingForm(instance=listing_id, data=request.POST)
+        form = ListingForm(instance=listing, data=request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('swift_realtys:listing', args=[listing.id]))
@@ -86,6 +82,25 @@ def favorites(request):
 @login_required
 def realtors(request):
     """Show realtors"""
-    realtors = Listing.objects.filter(owner=request.user).order_by('date_added')
+    realtors = Realtor.objects.all().order_by('date_added')
+
     context = {'realtors': realtors}
     return render(request, 'swift_realtys/realtors.html', context)
+
+@login_required
+def new_realtor(request):
+    """Add a new listing."""
+    if request.method != 'POST':
+        # No data submitted; create a blank form.
+        form = RealtorForm()
+    else:
+        # POST data submitted; process data.
+        form = RealtorForm(request.POST)
+        if form.is_valid():
+            new_realtor = form.save(commit=False)
+            new_realtor.owner = request.user
+            new_realtor.save()
+            return HttpResponseRedirect(reverse('swift_realtys:realtors'))
+
+    context = {'form': form}
+    return render(request, 'swift_realtys/new_realtor.html', context)

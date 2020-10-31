@@ -1,0 +1,34 @@
+{% extends "swift_realtys/base.html" %}
+
+{% block header %}
+  <h1>Realtors</h1>
+{% endblock header %}
+
+{% block content %}
+
+<div class="card-deck">
+    {% for realtor in realtors %}
+    <div class="col-sm-4">
+    <div class="card mt-5">
+      <img class="card-img-top" src="..." alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">{{ realtor.name }}</h5>
+        <p class="card-text">{{ listing.description }}</p>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><p class="card-text">Phone: {{ realtor.phone_number }}</p></li>
+            <li class="list-group-item"><p class="card-text">Email: {{ realtor.email_address }}</p></li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <h5>{{ realtor.agency }}</h5>
+      </div>
+    </div>
+    </div>
+    {% empty %}
+    <h2>No listings have been added yet.</h2>
+    {% endfor %}
+  </div>
+
+  <h3><a href="{% url 'swift_realtys:new_realtor' %}">List yourself as a realtor?</a></h3>
+
+  {% endblock content %}

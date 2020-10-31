@@ -2,11 +2,11 @@
 
 {% block content %}
 
-  <p><a href="{% url 'swift_realtys:topic' topic.id %}">{{ topic }}</a></p>
+  <p><a href="{% url 'swift_realtys:listing' listing.id %}">{{ listing }}</a></p>
 
   <p>Edit entry:</p>
 
-  <form action="{% url 'swift_realtys:edit_entry' entry.id %}" method='post'>
+  <form action="{% url 'swift_realtys:edit_listing' listing.id %}" method='post'>
       {% csrf_token %}
       {{ form.as_p }}
       <button name="submit">save changes</button>
