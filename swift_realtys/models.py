@@ -11,9 +11,7 @@ class Listing(models.Model):
     description = models.CharField(max_length=200, default='none')
     photo = models.ImageField(upload_to='images', default='none')
     date_added = models.DateTimeField(auto_now_add=True)
-    text = models.CharField(max_length=200, default='none')
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
-    favorite = models.BooleanField(default=False)
 
     class Meta:
         verbose_name_plural = 'listings'

@@ -126,6 +126,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
+
 #My settings
 LOGIN_URL = 'users/login/'
 

@@ -3,33 +3,30 @@
 {% load bootstrap4 %}
 
 {% block header %}
-  <h2>{{ listing.address }}</h2>
+  
 {% endblock header %}
 
 {% block content %}
 
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="?" alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">{{ listing.address }}</h5>
-  </div>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item"><p class="card-text">Bedrooms: {{ listing.num_bedrooms }}</p></li>
-    <li class="list-group-item"><p class="card-text">Bathrooms: {{ listing.num_bathrooms }}</p></li>
-    <li class="list-group-item"><p class="card-text">{{ listing.description }}</p></li>
-  </ul>
-  <div class="card-body">
-    
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">{{ listing.address }}</h1>
+    <img class="card-img-top" src="?" alt="Card image cap">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><p class="card-text">Bedrooms: {{ listing.num_bedrooms }}</p></li>
+      <li class="list-group-item"><p class="card-text">Bathrooms: {{ listing.num_bathrooms }}</p></li>
+    </ul>
+    <p class="lead">{{ listing.description }}</p>
   </div>
 </div>
 
-<div class="card-header">
-  <h3>
-    {{ entry.date_added|date:'M d, Y H:i' }}
+<div class="card-footer">
+  <h5>
+    {{ listing.date_added|date:'M d, Y H:i' }}
     <small>
        <a href="{% url 'swift_realtys:edit_listing' listing.id %}">edit listing</a>
     </small>
-  </h3>
+  </h5>
 </div>
 
 
