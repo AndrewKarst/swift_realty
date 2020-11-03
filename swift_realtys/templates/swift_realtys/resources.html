@@ -1,14 +1,153 @@
 {% extends "swift_realtys/base.html" %}
 
+{% load static %}
+
 {% block header %}
+
   <h1>Resources</h1>
+
 {% endblock header %}
 
 {% block content %}
   <h2>
-    Resource lists...
-  </h2>
-  <h2>
-    Mortgage calc...
-  </h2>
+    <u>Resource List</u>
+    </h2>
+    <br><br>
+    <ul>
+      <div class="media position-relative">
+  <img src="https://www.abajournal.com/images/main_images/ABA_logo.jpg" height="75" width="100" class="mr-3" alt="...">
+  <div class="media-body">
+    <h4 class="mt-0">Guide for First-Time Homebuyers</h4>
+    <p>At this site by the American Bar Association, consumers can learn about buying their first home.</p>
+    <a href="https://www.americanbar.org/groups/real_property_trust_estate/resources/home-buying-resources/" class="stretched-link">Click here</a>
+  </div>
+</div>
+<div class="media position-relative">
+<img src="https://nyplusg.com/wp-content/uploads/2018/08/2016-02-16_1013.png" height="75" width="100" class="mr-3" alt="...">
+<div class="media-body">
+<h4 class="mt-0">Homebuyer Assistance Programs</h4>
+<p>See all the available homebuyer assistance programs that are available in your state.</p>
+<a href="https://www.nerdwallet.com/blog/mortgages/first-time-home-buyer-programs-by-state/" class="stretched-link">Click here</a>
+</div>
+</div>
+<div class="media position-relative">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTKWKlTS96cbqfyRuYqLPDFDtd7wRJjMzkdLw&usqp=CAU" height="75" width="100" class="mr-3" alt="...">
+<div class="media-body">
+<h4 class="mt-0">Homebuyer Education Test</h4>
+<p>Take this test to see if you are really ready to buy your first home.</p>
+<a href="https://www.readynest.com/homebuyer-resources/the-test" class="stretched-link">Click here</a>
+</div>
+</div>
+<div class="media position-relative">
+<img src="https://app-usa-modeast-prod-a01239f-ecas.s3.amazonaws.com/Logo_USAGov.png" height="75" width="100" class="mr-3" alt="...">
+<div class="media-body">
+<h4 class="mt-0">Homebuying Help</h4>
+<p>Do you need help buying your first home? Learn about government programs that may be available to you.</p>
+<a href="https://www.usa.gov/buying-home" class="stretched-link">Click here</a>
+</div>
+</div>
+<div class="media position-relative">
+<img src="https://res.cloudinary.com/moneygeek/image/upload/v1578221014/MoneyGeek.com/media/money_geek_logo_tmuqul.svg" height="75" width="100" class="mr-3" alt="...">
+<div class="media-body">
+<h4 class="mt-0">Homebuyer Quiz</h4>
+<p>Take this quick and easy quiz to see if homebuying is really right for you.</p>
+<a href="https://www.moneygeek.com/mortgage/resources/first-time-buyers-guide/" class="stretched-link">Click here</a>
+</div>
+</div>
+<div class="media position-relative">
+<img src="https://www.mannpublications.com/mannreportmanagement/wp-content/uploads/sites/5/2020/06/62068757_10157868114112871_5273682822547111936_n.png" height="75" width="100" class="mr-3" alt="...">
+<div class="media-body">
+<h4 class="mt-0">Homebuying Guide</h4>
+<p>This simple 12-step guide will take you all the way through the process of buying a home.</p>
+<a href="https://www.realtor.com/advice/guides/first-time-home-buyer/?iid=int-rdc_firstTimeBuyer_landing" class="stretched-link">Click here</a>
+</div>
+</div>
+    </ul>
+    <h2>
+      <u>Mortgage Calculator</u>
+    </h2>
+  <style>
+      #loading img {
+        width: 200px;
+      }
+      #loading,
+      #results {
+        display: none;
+      }
+      .card {
+        background: #E5EFF1;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="container">
+      <div class="row">
+        <div>
+          <div class="card card-body text-center mt-5">
+            <h1 class="heading display-5 pb-3">Calculate Your Payments</h1>
+            <form id="loan-form">
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="addon1">$</span>
+                  </div>
+                  <input id="amount" type="number" class="form-control" placeholder="Loan amount" aria-label="amount" aria-describedby="addon1">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="addon2">%</span>
+                  </div>
+                  <input id="interest" type="number" class="form-control" placeholder="Interest" aria-label="interest" aria-describedby="addon2">
+                </div>
+              </div>
+              <div class="form-group">
+                <input id="years" type="number" class="form-control" placeholder="Years to repay" aria-label="years">
+              </div>
+              <div class="form-group">
+                <input id="submit" type="submit" value="Calculate" class="btn btn-dark btn-block">
+              </div>
+            </form>
+            <!-- LOADER HERE -->
+            <div id="loading">
+              <img src="https://media1.giphy.com/media/3oEjI6SIIHBdRxXI40/200.gif" alt="Loader animation">
+            </div>
+            <!-- RESULTS -->
+            <div id="results" class="pt-4">
+              <h5>Results</h5>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="addon3">Monthly Payment</span>
+                  </div>
+                  <input id="monthly-payment" type="text" class="form-control"aria-label="amount" aria-describedby="addon3" disabled>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="addon4">Total Payment</span>
+                  </div>
+                  <input id="total-payment" type="text" class="form-control" aria-label="amount" aria-describedby="addon4" disabled>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="addon5">Total interest</span>
+                  </div>
+                  <input id="total-interest" type="text" class="form-control" aria-label="amount" aria-describedby="addon5" disabled>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="{% static 'JS/app.js' %}"></script>
 {% endblock content %}

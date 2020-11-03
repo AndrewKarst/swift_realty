@@ -1,8 +1,21 @@
 {% extends "swift_realtys/base.html" %}
 
 {% block header %}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Anton">
+<style>
+h1 {
+  font-family: "Anton";
+  font-size: 44px;
+}
+h3 {
+  font-family: "Anton";
+  font-size: 36px;
+}
+</style>
   <div class='jumbotron'>
-    <h1>Find your dream home!</h1>
+    <h1 class="text-center">Swift Realty</h1>
+    <img src="https://i.pinimg.com/originals/0b/c4/a8/0bc4a864289f2f40ef9c845e4539c86a.jpg" class="rounded mx-auto d-block" alt="Responsive image"><br><br>
+    <h3 class="text-center">It's time to find your dream home!</h3>
   </div>
 {% endblock header %}
 
@@ -12,11 +25,11 @@
     <a href="{% url 'swift_realtys:listings' %}">Go to home listings.</a>
   </h2>
   {% else %}
-  <h2>
+  <p class="text-center">
     <a href="{% url 'users:register' %}">Register an account</a> to search for home listings and connect with realtors.
-  </h2>
-  <h2>
+  </p>
+  <p class="text-center">
     When you find a home you like you can save it to your favorites list, then contact the listing's realtor.
-  </h2>
+  </p>
   {% endif %}
 {% endblock content %}
