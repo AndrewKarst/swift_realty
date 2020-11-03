@@ -155,7 +155,7 @@ if cwd == '/app' or cwd[:4] == '/tmp':
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
     # Allow only Heroku to host the project
-    ALLOWED_HOSTS = ['logoflearningapp.herokuapp.com']
+    ALLOWED_HOSTS = ['swift-realty-app.herokuapp.com']
 
     DEBUG = False
 
