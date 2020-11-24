@@ -1,19 +1,115 @@
 {% extends "swift_realtys/base.html" %}
-{% load static %}
+
 
 {% block header %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.1/js/bootstrap.min.js"></script>
+
   <h1>Listings</h1>
-  <small><a href="{% url 'swift_realtys:new_listing' %}">Add a new listing</a></small>
+  <h3><a href="{% url 'swift_realtys:new_listing' %}">Add a new listing</a></h3>
+  <style type="text/css">
+    /* Dropdown Button */
+.dropbtn {
+  background-color: #383838;
+  color: white;
+  padding: 14px;
+  font-size: 14px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #202020;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #000;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #202020;}
+
+		.sidebar {
+			height:100%;
+			width:160px;
+			position: fixed;
+			z-index:1;
+			top:0;
+			right:0;
+			background-color:#FFF;
+			overflow-x: :hidden;
+			padding-top:100px;
+      padding-left:25px;
+		}
+
+		.sidebar a {
+			padding:6px 8px 6px 16px;
+			text-decoration: none;
+			font-size:25px;
+			display:block;
+		}
+
+		.sidebar a:hover{
+			color:#428BCA;
+		}
+
+	</style>
+
 {% endblock header %}
 
 {% block content %}
 
-<h1>{{ listing.photo.path }}</h1>
+<div class="sidebar">
+  <div class="dropdown">
+  <button class="dropbtn">Sort Listings</button>
+  <div class="dropdown-content">
+    <a href="{% url 'swift_realtys:listings_sortbybeds' %}"># Bedrooms</a>
+    <a href="{% url 'swift_realtys:listings_sortbybaths' %}"># Bathrooms</a>
+  </div>
+  <br><br>
+  <i>Sort will sort the list by listing the highest number first.</i>
+</div>
+</div>
+
   <div class="card-deck">
     {% for listing in listings %}
     <div class="col-sm-4">
     <div class="card mt-5">
-      <img src="{{ listing.photo }}" alt="Card image cap">
+      {% if listing not in user.favorite.all %}
+      <div class="d-flex justify-content-end align-items-start">
+        <a href="{% url 'swift_realtys:favorite' listing.id %}" class="btn btn-info btn-sm">
+          <span class="glyphicon glyphicon-heart-empty"></span> Add to Favorites
+        </a><br><br>
+      </div>
+      {% else %}
+      <div class="d-flex justify-content-end align-items-start">
+      <a href="{% url 'swift_realtys:remove_favorite' listing.id %}" class="btn btn-info btn-sm">
+          <span class="glyphicon glyphicon-remove"></span> Remove Favorite
+        </a><br><br>
+        </div>
+      {% endif %}
+      <img class="card-img-top" src="{{ listing.get_photo_url }}" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{ listing.address }}</h5>
         <p class="card-text">{{ listing.description }}</p>
@@ -23,6 +119,7 @@
       </div>
     </div>
     </div>
+
     {% empty %}
     <h2>No listings have been added yet.</h2>
     {% endfor %}

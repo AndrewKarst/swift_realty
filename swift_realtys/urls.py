@@ -4,12 +4,18 @@ from django.urls import path
 
 from . import views
 
+from django.contrib import admin
+from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+from .views import *
+
 app_name = 'swift_realtys'
 urlpatterns = [
     # Home page
     path('', views.index, name='index'),
 
-    # Show all listingss.
+    # Show all listings.
     path('listings/', views.listings, name='listings'),
 
     # Detail page for a single listing.
@@ -24,9 +30,21 @@ urlpatterns = [
     # Page for about us info
     path('about_us/', views.about_us, name='about_us'),
 
+    # Sort listings by bedrooms
+    path('listings_sortbybeds/', views.listings_sortbybeds, name='listings_sortbybeds'),
+
+    # Sort listings by bathrooms
+    path('listings_sortbybaths/', views.listings_sortbybaths, name='listings_sortbybaths'),
+
     # Page for favorites
     path('favorites/', views.favorites, name='favorites'),
-    
+
+    # Add as favorite
+    path('favorite/<int:listing_id>/', views.favorite, name='favorite'),
+
+    # Remove Favorite
+    path('remove_favorite/<int:listing_id>/', views.remove_favorite, name='remove_favorite'),
+
     # Page for resources
     path('resources/', views.resources, name='resources'),
 
@@ -35,4 +53,5 @@ urlpatterns = [
 
     # Page for adding a realtor
     path('new_realtor/', views.new_realtor, name='new_realtor'),
-]
+
+]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

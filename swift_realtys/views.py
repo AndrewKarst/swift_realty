@@ -1,10 +1,15 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect, Http404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.db import models
+from django.contrib.auth.models import User
+
+from .forms import *
 
 from .models import Listing, Realtor
 from .forms import ListingForm, RealtorForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -21,11 +26,24 @@ def resources(request):
     return render(request, 'swift_realtys/resources.html')
 
 @login_required
+def listings_sortbybeds(request):
+    listings = Listing.objects.all().order_by('-num_bedrooms')
+    context = {'listings': listings}
+    return render(request, 'swift_realtys/listings.html', context)
+
+@login_required
+def listings_sortbybaths(request):
+    listings = Listing.objects.all().order_by('-num_bathrooms')
+    context = {'listings': listings}
+    return render(request, 'swift_realtys/listings.html', context)
+
+@login_required
 def listings(request):
     """Show all listings"""
     listings = Listing.objects.all().order_by('date_added')
     context = {'listings': listings}
     return render(request, 'swift_realtys/listings.html', context)
+
 
 def listing(request, listing_id):
     """Show a single listing"""
@@ -57,9 +75,9 @@ def edit_listing(request, listing_id):
     """Edit an existing listing"""
     listing = Listing.objects.get(id=listing_id)
     if listing.owner != request.user:
-        raise Http404
+        raise Http404("You are not the owner and cannot edit this listing.")
 
-    if request.method != 'POST':
+    elif request.method != 'POST':
         # Initial request; pre-fill form with the current entry.
         form = ListingForm(instance=listing)
     else:
@@ -68,16 +86,35 @@ def edit_listing(request, listing_id):
         if form.is_valid():
             form.save()
             return HttpResponseRedirect(reverse('swift_realtys:listing', args=[listing.id]))
-    
+
     context = {'listing': listing, 'form': form}
     return render(request, 'swift_realtys/edit_listing.html', context)
 
 @login_required
 def favorites(request):
     """Show favorite listings"""
-    listings = Listing.objects.filter(owner=request.user).order_by('date_added')
+    user = request.user
+    listings = user.favorite.all().order_by('date_added')
     context = {'listings': listings}
     return render(request, 'swift_realtys/favorites.html', context)
+
+@login_required
+def favorite(request, listing_id):
+    user = request.user
+    listing = Listing.objects.get(id=listing_id)
+    user.favorite.add(listing)
+    listings = Listing.objects.all().order_by('date_added')
+    context = {'listings': listings}
+    return render(request, 'swift_realtys/listings.html', context)
+
+@login_required
+def remove_favorite(request, listing_id):
+    user = request.user
+    listing = Listing.objects.get(id=listing_id)
+    user.favorite.remove(listing)
+    listings = Listing.objects.all().order_by('date_added')
+    context = {'listings': listings}
+    return render(request, 'swift_realtys/listings.html', context)
 
 @login_required
 def realtors(request):

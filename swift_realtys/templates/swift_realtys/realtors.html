@@ -10,7 +10,7 @@
     {% for realtor in realtors %}
     <div class="col-sm-4">
     <div class="card mt-5">
-      <img class="card-img-top" src="..." alt="Card image cap">
+      <img class="card-img-top" src="{{ realtor.get_photo_url }}" alt="Card image cap">
       <div class="card-body">
         <h5 class="card-title">{{ realtor.name }}</h5>
         <p class="card-text">{{ listing.description }}</p>
