@@ -5,8 +5,8 @@ from .models import Listing, Realtor
 class ListingForm(forms.ModelForm):
     class Meta:
         model = Listing
-        fields = ['address', 'num_bedrooms', 'num_bathrooms', 'description']
-        labels = {'address': 'Address:', 'num_bedrooms': 'Bedrooms:', 'num_bathrooms': 'Bathrooms:', 'description': 'Description:'}
+        fields = ['address', 'num_bedrooms', 'num_bathrooms', 'description', 'photo']
+        labels = {'address': 'Address:', 'num_bedrooms': 'Bedrooms:', 'num_bathrooms': 'Bathrooms:', 'description': 'Description:', 'photo': 'Picture:'}
 
 class RealtorForm(forms.ModelForm):
     class Meta:

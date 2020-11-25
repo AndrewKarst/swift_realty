@@ -7,7 +7,7 @@
 
 {% block content %}
 
-  <form action="{% url 'swift_realtys:new_listing' %}" method='post' class="form">
+  <form action="{% url 'swift_realtys:new_listing' %}" method='post' enctype="multipart/form-data" class="form">
       {% csrf_token %}
       {% bootstrap_form form %}
 
@@ -17,3 +17,5 @@
   </form>
 
 {% endblock content %}
+
+
