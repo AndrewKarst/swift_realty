@@ -1,0 +1,55 @@
+{% extends "swift_realtys/base.html" %}
+
+{% load static %}
+
+{% block content %}
+<!-- Contact Form-->
+{% if message_name %}
+<center>
+  <h2>Thanks {{ message_name }}!</h2>
+  <p>We received your email and will respond shortly...
+  </p>
+</center>
+<br><br><br>
+{% else %}
+
+<div class="container">
+  <div class="row">
+    <!--Section Heading-->
+    
+      <h1 class="text-left">Contact Us:</h1>
+  </div>
+    <!--Form-->
+    <form action= " " method="post">
+      {% csrf_token %}
+      <div class="row">Your Name:</div>
+      <div class="row">
+        <input type="text" name="message-name"
+        class="form-control mb-30" placeholder=
+        "none">
+      </div>
+      <br>
+      <div class="row">Your Email:</div>
+      <div class="row">
+        <input type="email" name="message-email"
+        class="form-control mb-30"
+        placeholder="none">
+      </div>
+      <br>
+      <div class="row">Your Message:</div>
+      <div class="row">
+        <textarea name="message" class=
+        "form-control rounded-0" rows="10 placeholder=
+        "none"></textarea>
+      </div>
+      <br>
+      <div class="row">
+        <button name="submit" class="btn btn-primary btn-lg">Submit</button>
+      </div>
+    </div>
+    </form>
+  </div>
+</div>
+{% endif %}
+
+  {% endblock content %}

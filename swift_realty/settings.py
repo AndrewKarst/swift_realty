@@ -125,12 +125,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = 'swift_realtys/static/'
+STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = [
-    BASE_DIR / "static", "media"
+    BASE_DIR / "/swift_realtys/static", "/swift_realtys/static/JS",
+    "/swift_realtys/static/CSS", "/swift_realtys/static/media",
 ]
 
 #My settings
@@ -140,6 +141,23 @@ LOGIN_URL = 'users/login/'
 BOOTSTRAP4 = {
     'include_jquery': True,
 }
+
+
+#EmailSettings
+import smtplib,ssl
+EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST='smtp.gmail.com'
+EMAIL_PORT=587
+#SMTP_SECURITY='STARTTLS'
+EMAIL_HOST_USER='swiftrealtybiz@gmail.com' #Enteremailaddressassociatedwiththeemailhost
+EMAIL_HOST_PASSWORD='Youshallnotpass' #Enterthepasswordtoaccountasastringhere
+EMAIL_USE_TLS=True #EMAIL_USE_SSL=True
+#EmailSettings
+#EMAIL_HOST='localhost'
+#EMAIL_PORT=1025#EMAIL_HOST_USER=''
+#EMAIL_HOST_PASSWORD=''
+#EMAIL_USE_TLS=False
+#EMAIL_USE_SSL=False
 
 # Heroku settings
 cwd = os.getcwd()

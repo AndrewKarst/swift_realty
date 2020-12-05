@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 
 from .forms import *
 
@@ -21,6 +22,25 @@ def about_us(request):
     """The about us page for Swift Realty"""
     return render(request, 'swift_realtys/about_us.html')
 
+def contact(request):
+    """Contact"""
+    if request.method == "POST":
+        message_name = request.POST['message-name']
+        message_email = request.POST['message-email']
+        message = request.POST['message']
+
+        #send an email
+        send_mail(
+            message_name, # subject
+            message, # message
+            message_email, # From email
+            [''], # To Email. Email address that all emails are sent to from the app
+        )
+
+        return render(request, 'swift_realtys/contact.html', {'message_name':message_name})
+    else:
+        return render(request, 'swift_realtys/contact.html')
+        
 def resources(request):
     """The resources page for Swift Realty"""
     return render(request, 'swift_realtys/resources.html')

@@ -1,15 +1,69 @@
 h1 {
-  color: black;
-}
-
-body {
-  background-color: white;
-}
-
-p {
-  font-size: 16px !important;
-}
-
-a {
-  font-size: 15px !important;
-}
+  ​
+    color: black;
+    /*color: white; */
+  ​
+  }
+  /*BASHAR: delete the under body tag to finalize;*/
+  /*body {
+    /*background-color: #D2C79A !important;
+  }
+  */
+  ​
+  body {
+  /*background-image: linear-gradient(to bottom, #d2c79a, #c2bc96, #b3b191, #a5a68d, #989b88);} */
+  ​
+  /*background-color: #fdb713 !important; */
+  /* background-color: #B3CBE4 !important; */
+  background-color: #5D88BB !important; 
+       /*background: url('../../images/morocco-blue.png') repeat 0 0; */
+  }
+  ​
+  /*body {
+  background-image: linear-gradient(to top, #fdb713, #74a637, #007f60, #00515b, #212529) !important;} */
+  ​
+  p {
+    font-size: 16px !important;
+  }
+  ​
+  a {
+    font-size: 15px !important;
+  }
+  ​
+  ​
+  .card-img-top{
+  ​
+    width: 300px;
+    height: 250px;
+    border: 3px solid #ccc;
+    background: #eee;
+    margin: auto;
+    padding: 15px 10px;
+  }
+  ​
+  ​
+  .card-img-top:hover {      
+  transform: scale(1.5); 
+  }
+  ​
+  /* you can delete the code under to make the add to favorites tabs go back to its blue original color */
+  .btn-sm{
+  ​
+    background-color: #989B88 !important;
+    border:none;
+  }
+  ​
+  .jumbotron{
+    /*background-image: linear-gradient(to bottom, #d2c79a, #c2bc96, #b3b191, #a5a68d, #989b88);} */
+  background-color: #5D88BB !important;
+  }
+  ​
+  /*BASHAR:  trying to change the color under the images but not working*/
+  /*.card-text , .card-title p{
+    color: white !important;
+  ​
+  }
+  */
+  ​
+  ​
+   

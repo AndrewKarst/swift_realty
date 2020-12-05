@@ -8,7 +8,8 @@
 
 {% block content %}
 
-<div class="card" style="width: 18rem;">
+<div class='jumbotron'>
+<div class="card">
   <img class="card-img-top" src="{{ listing.get_photo_url }}" alt="Card image cap">
   <div class="card-body">
     <h5 class="card-title">{{ listing.address }}</h5>
@@ -30,6 +31,7 @@
        <a href="{% url 'swift_realtys:edit_listing' listing.id %}">edit listing</a>
     </small>
   </h3>
+</div>
 </div>
 
 

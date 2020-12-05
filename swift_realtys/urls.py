@@ -53,4 +53,7 @@ urlpatterns = [
     # Page for adding a realtor
     path('new_realtor/', views.new_realtor, name='new_realtor'),
 
+    # Page for contact
+    path('contact/',views.contact,name="contact"),
+
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
